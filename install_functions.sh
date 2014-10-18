@@ -25,39 +25,6 @@ function update_submodules {
     git submodule update
 }
 
-function install_relevance_etc {
-    backup "$HOME/.relevance-etc"
-    ln -s "$DOTFILES/submodules/relevance/etc" "$HOME/.relevance-etc"
-}
-
-function install_org_mode {
-    (
-        cd "$DOTFILES/.emacs.d"
-        if [ ! -d org-mode ]; then
-            wget -O org-mode-master.zip \
-                https://github.com/stuartsierra/org-mode/archive/master.zip
-            unzip org-mode-master.zip
-            mv org-mode-master org-mode
-        fi
-        cd org-mode
-        make
-    )
-}
-
-function install_magit {
-    (
-        cd "$DOTFILES/.emacs.d"
-        if [ ! -d magit ]; then
-            wget -O magit-1.2.0.tar.gz \
-                https://github.com/magit/magit/archive/1.2.0.tar.gz
-            tar xzf magit-1.2.0.tar.gz
-            mv magit-1.2.0 magit
-        fi
-        cd magit
-        make
-    )
-}
-
 function compile_local_emacs_lisp {
     emacs -batch -f batch-byte-recompile-directory "$DOTFILES/.emacs.d/local"
 }
@@ -91,6 +58,5 @@ $HOME/bin
 /sbin
 /opt/X11/bin
 /usr/texbin
-$HOME/.relevance-etc/scripts
 EOF
 }

@@ -25,6 +25,8 @@
     smex
     typopunct
     yasnippet
+    magit
+    org-mode
     ))
 
 (dolist (p my-packages)

@@ -1,6 +1,5 @@
-[user]
-	name = Stuart Sierra
-	email = mail@stuartsierra.com
+[include]
+	path = .gituser
 [alias]
 	st = status
 	ci = commit
@@ -14,10 +13,10 @@
 	ls = ls-files
 	# Show files ignored by git:
 	ign = ls-files -o -i --exclude-standard
+[branch]
+	autosetupmerge = true
 [color]
 	ui = true
-[push]
-	default = tracking
 [color "branch"]
 	current = yellow reverse
 	local = yellow
@@ -34,3 +33,8 @@
 [core]
 	editor = ~/bin/edit
 	excludesfile = ~/.gitignore_global
+	pager = "less -FXRS -x2"
+[push]
+	default = simple
+[rebase]
+	autosquash = true

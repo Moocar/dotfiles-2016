@@ -22,7 +22,6 @@ link_with_backup .ackrc
 mkdir -p "$HOME/bin"
 link_with_backup bin/clj
 link_with_backup bin/edit
-link_with_backup bin/fresh-chrome
 link_with_backup bin/git-submodule-pull
 link_with_backup bin/tab
 link_with_backup bin/trunctail
@@ -31,17 +30,10 @@ link_with_backup .emacs.d
 install_elpa
 link_with_backup .emacs
 link_with_backup .emacs-custom.el
-install_org_mode
-install_magit
 compile_local_emacs_lisp
-
-install_relevance_etc
-
-backup ~/.relevance-etc
-ln -s $DOTFILES/submodules/relevance/etc $HOME/.relevance-etc
 
 write_home_path_file
 
-if [[ "$USER" != "stuart" ]]; then
+if [[ "$USER" != "anthony" ]]; then
     unset_git_user
 fi

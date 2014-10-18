@@ -56,11 +56,13 @@ alias beep="echo -e '\a'"
 
 alias pgrep='ps aux | grep'
 
+alias w="cd ~/workspace"
+
 # for Perl5 / CPAN
 if [ -e /opt/local/lib/perl5 ]; then
     export PERL5LIB="/opt/local/lib/perl5/5.8.8:/opt/local/lib/perl5/site_perl/5.8.8:/opt/local/lib/perl5/vendor_perl/5.8.8"
 fi
-    
+
 if [ -e /Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt ]; then
     alias truecrypt="/Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt -t"
 fi
@@ -73,22 +75,11 @@ else
     alias e="nano"
 fi
 
+alias rsync="rsync -P -vaz --rsh=ssh"
+
 # Local system stuff
 if [ -e ~/.bash_local ]; then
     source ~/.bash_local
-fi
-
-# Relevance "etc" scripts
-if [ -d ~/.relevance-etc ]; then
-    export PATH=$PATH:~/.relevance-etc/scripts
-    source ~/.relevance-etc/bash/git.sh
-    # source ~/.relevance-etc/bash/git_prompt.sh
-    source ~/.relevance-etc/bash/ssh_autocompletion.sh
-fi
-
-# Relevance pairing
-if [ -e ~/sourcecode.tc ]; then
-    alias sourcecode="truecrypt -t -k '' --protect-hidden=no $HOME/sourcecode.tc $HOME/src"
 fi
 
 # cdargs
@@ -103,16 +94,8 @@ fi
 
 # Java on OS X
 if [[ -f /usr/libexec/java_home ]]; then
-    export JAVA_HOME="$(/usr/libexec/java_home)"
+    export JAVA_HOME="$(/usr/libexec/java_home -v 1.7)"
 fi
-
-# Google Chrome Testing instances
-function newchrome {
-    local now=`date +%Y%m%d%H%M%S`
-    local dir=/tmp/chrome$now
-    cp -R ~/fresh-chrome "$dir"
-    open -na 'Google Chrome' --args --user-data-dir="$dir"
-}
 
 ## GPG Agent
 ## From http://sudoers.org/2013/11/05/gpg-agent.html
@@ -123,25 +106,15 @@ if [[ -f ${GPG_AGENT} && -e "${HOME}/.bash_gpg" ]]; then
     source "${HOME}/.bash_gpg"
 fi
 
-## 'pass' Password Manager; http://www.zx2c4.com/projects/password-store/
-if [[ -e /usr/local/etc/bash_completion.d/password-store ]]; then
-    source /usr/local/etc/bash_completion.d/password-store
-fi
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
 
-# Re-acquire forwarded SSH key
-# from http://tychoish.com/rhizome/9-awesome-ssh-tricks/
-function ssh-reagent {
-    for agent in /tmp/ssh-*/agent.*; do
-        export SSH_AUTH_SOCK=$agent
-        if ssh-add -l 2>&1 > /dev/null; then
-            echo Found working SSH Agent:
-            ssh-add -l
-            return
-        fi
-    done
-    echo Cannot find ssh agent - maybe you should reconnect and forward it?
-}
+#### history ####
 
-if [ -d ~/src/clj/clojurescript ]; then
-    export CLOJURESCRIPT_HOME=~/src/clj/clojurescript
-fi
+HISTSIZE=100000
+HISTFILESIZE=100000
+HISTIGNORE=exit:l:la:ll:lsd:pwd:..:...:....:.....
+HISTCONTROL=ignoredups
+
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend

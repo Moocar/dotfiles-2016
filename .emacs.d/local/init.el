@@ -8,6 +8,12 @@
 (push "*.dtm" ffip-patterns)
 (push "*.xml" ffip-patterns)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Magit
+
+(global-set-key [f2] 'start-kbd-macro)
+(global-set-key [f3] 'end-kbd-macro)
+(global-set-key [f4] 'call-last-kbd-macro)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Customizations
@@ -16,6 +22,7 @@
 (put 'downcase-region 'disabled nil)
 (put 'erase-buffer 'disabled nil)
 
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Dired
@@ -299,13 +306,14 @@ and CDR is beginning position."
 
 (defun clojure-paredit-hook () (paredit-mode +1))
 (add-hook 'clojure-mode-hook 'clojure-paredit-hook)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
 
 (define-key clojure-mode-map (kbd "C-c M-k") 'cider-copy-current-ns)
-(define-key clojure-mode-map "{" 'paredit-open-brace)
-(define-key clojure-mode-map "}" 'paredit-close-brace)
+; (define-key clojure-mode-map "{" 'paredit-open-brace)
+; (define-key clojure-mode-map "}" 'paredit-close-brace)
 
-(define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
-(define-key paredit-mode-map (kbd "M-[") nil)
+; (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
+; (define-key paredit-mode-map (kbd "M-[") nil)
 
 ;; Custom indentation rules; see clojure-indent-function
 (define-clojure-indent
@@ -319,7 +327,7 @@ and CDR is beginning position."
   (do-it 'defun)
   (go-loop 'defun))
 
-(setq cider-words-of-inspiration '(""))
+; (setq cider-words-of-inspiration '(""))
 
 (global-set-key (kbd "C-c o r") 'cider-switch-to-repl-buffer)
 
