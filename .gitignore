@@ -7,3 +7,4 @@
 .org-id-locations
 *.tar.gz
 *.zip
+/.emacs.d/.repl-history
