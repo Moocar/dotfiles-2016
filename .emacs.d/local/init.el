@@ -202,7 +202,7 @@
 (when (fboundp 'set-word-wrap)
   (add-hook 'org-mode-hook 'set-word-wrap))
 
-(setq daypage-path "~/Documents/daypage/")
+(setq daypage-path "~/Dropbox/daypage/")
 
 (defun find-daypage (&optional date)
   "Go to the day page for the specified date,
@@ -616,10 +616,10 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
   (menu-bar-mode 1))
 
 ;; Fix Unicode character spacing; see http://stackoverflow.com/q/8779351
-(when (string-equal system-type "darwin")
-  (set-fontset-font "fontset-default"
-                    'unicode
-                    '("Menlo" . "iso10646-1")))
+ (when (string-equal system-type "darwin")
+   (set-fontset-font "fontset-default"
+                     'unicode
+                     '("Menlo" . "iso10646-1")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
