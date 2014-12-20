@@ -26,7 +26,7 @@
     typopunct
     yasnippet
     magit
-    org-mode
+    org
     ))
 
 (dolist (p my-packages)
