@@ -281,16 +281,16 @@ and CDR is beginning position."
     (unless (bolp) (backward-char))
     (when (re-search-forward org-emph-re limit t)
       (let ((marker (match-string 3)))
-	(cons (cond
-	       ((equal marker "*") 'bold)
-	       ((equal marker "/") 'italic)
-	       ((equal marker "_") 'underline)
-	       ((equal marker "+") 'strike-through)
-	       ((equal marker "~") 'code)
-	       ((equal marker "=") 'verbatim)
-	       ((equal marker "`") 'code)
-	       (t (error "Unknown marker at %d" (match-beginning 3))))
-	      (match-beginning 2))))))
+        (cons (cond
+               ((equal marker "*") 'bold)
+               ((equal marker "/") 'italic)
+               ((equal marker "_") 'underline)
+               ((equal marker "+") 'strike-through)
+               ((equal marker "~") 'code)
+               ((equal marker "=") 'verbatim)
+               ((equal marker "`") 'code)
+               (t (error "Unknown marker at %d" (match-beginning 3))))
+              (match-beginning 2))))))
 
 
 
@@ -509,6 +509,8 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
   (interactive)
   (setq show-trailing-whitespace
         (not show-trailing-whitespace)))
+
+(add-hook 'before-save-hook 'clean-up-whitespace)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

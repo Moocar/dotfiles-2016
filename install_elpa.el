@@ -25,7 +25,6 @@
     smex
     typopunct
     yasnippet
-    magit
     org
     ))
 

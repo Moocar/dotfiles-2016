@@ -10,3 +10,12 @@
 [submodule "submodules/cider"]
 	path = submodules/cider
 	url = https://github.com/stuartsierra/cider.git
+[submodule "submdule/magit"]
+	path = submdule/magit
+	url = git@github.com:magit/magit.git
+[submodule "submodules/magit"]
+	path = submodules/magit
+	url = git@github.com:magit/magit.git
+[submodule "submodules/git-modes"]
+	path = submodules/git-modes
+	url = git@github.com:magit/git-modes.git
