@@ -301,6 +301,23 @@ and CDR is beginning position."
 (require 'clojure-mode)
 (require 'paredit)
 (require 'align-cljlet)
+(require 'rainbow-delimiters)
+
+;; show documentation for a function in the echo area
+(add-hook 'cider-mode-hook #'eldoc-mode)
+
+;; Disable switching buffers to the repl upon connection
+(setq cider-repl-pop-to-buffer-on-connect nil)
+
+;; History
+(setq cider-repl-history-size 1000)
+(setq cider-repl-history-file "cider-history")
+
+;; Navigate around camel case words
+(add-hook 'cider-repl-mode-hook #'subword-mode)
+
+(add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'cider-mode-hook #'rainbow-delimiters-mode)
 
 (show-paren-mode 1)
 
@@ -465,8 +482,8 @@ Goes backward if ARG is negative; error if CHAR not found."
 ;; Line-numbering
 
 (require 'linum-off)
-(require 'hlinum)
-
+;(require 'hlinum)
+(global-linum-mode 0)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Whitespace
@@ -644,3 +661,31 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 ;; Work around path bug on OS X
 (when (string-equal "/" default-directory)
   (cd "~/"))
+
+(defvar-local hidden-mode-line-mode nil)
+
+;; Great for presentations!
+(define-minor-mode hidden-mode-line-mode
+  "Minor mode to hide the mode-line in the current buffer."
+  :init-value nil
+  :global t
+  :variable hidden-mode-line-mode
+  :group 'editing-basics
+  (if hidden-mode-line-mode
+      (setq hide-mode-line mode-line-format
+            mode-line-format nil)
+    (setq mode-line-format hide-mode-line
+          hide-mode-line nil))
+  (force-mode-line-update)
+  ;; Apparently force-mode-line-update is not always enough to
+  ;; redisplay the mode-line
+  (redraw-display)
+  (when (and (called-interactively-p 'interactive)
+             hidden-mode-line-mode)
+    (run-with-idle-timer
+     0 nil 'message
+     (concat "Hidden Mode Line Mode enabled.  "
+             "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
+
+;; If you want to hide the mode-line in every buffer by default
+;; (add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
