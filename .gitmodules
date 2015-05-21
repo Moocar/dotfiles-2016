@@ -13,9 +13,6 @@
 [submodule "submodules/magit"]
         path = submodules/magit
         url = git@github.com:magit/magit.git
-[submodule "submodules/git-modes"]
-        path = submodules/git-modes
-        url = git@github.com:magit/git-modes.git
 [submodule "submodules/rainbow-delimiters"]
         path = submodules/rainbow-delimiters
         url = https://github.com/Fanael/rainbow-delimiters.git
