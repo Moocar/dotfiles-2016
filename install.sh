@@ -27,6 +27,11 @@ link_with_backup bin/git-submodule-pull
 link_with_backup bin/tab
 link_with_backup bin/trunctail
 
+user=`whoami`
+sudo mkdir -p "/usr/local/bin"
+sudo chown "$user" "/usr/local/bin"
+
+symlink_emacs
 link_with_backup .emacs.d
 install_elpa
 link_with_backup .emacs
