@@ -17,5 +17,8 @@
         path = submodules/rainbow-delimiters
         url = https://github.com/Fanael/rainbow-delimiters.git
 [submodule "submodules/git-modes"]
-	path = submodules/git-modes
-	url = https://github.com/magit/git-modes.git
+        path = submodules/git-modes
+        url = https://github.com/magit/git-modes.git
+[submodule "submodules/smex"]
+	path = submodules/smex
+	url = https://github.com/nonsequitur/smex.git
