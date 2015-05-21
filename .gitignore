@@ -3,7 +3,6 @@
 *~
 .emacs.d/swank
 .emacs.d/org-mode
-.emacs.d/magit
 .org-id-locations
 *.tar.gz
 *.zip
