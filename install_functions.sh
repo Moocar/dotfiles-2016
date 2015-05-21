@@ -47,6 +47,14 @@ function unset_git_user {
     done
 }
 
+function symlink_emacs {
+cat <<EOF > "/usr/local/bin/emacs"
+#!/bin/sh
+/Applications/Emacs.app/Contents/MacOS/Emacs
+EOF
+chmod +x "/usr/local/bin/emacs"
+}
+
 function write_home_path_file {
     cat <<EOF > "$HOME/.path"
 $HOME/bin
