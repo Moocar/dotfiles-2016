@@ -12,7 +12,7 @@
         url = https://github.com/stuartsierra/cider.git
 [submodule "submodules/magit"]
         path = submodules/magit
-        url = https://github.com:magit/magit.git
+        url = https://github.com/magit/magit.git
 [submodule "submodules/rainbow-delimiters"]
         path = submodules/rainbow-delimiters
         url = https://github.com/Fanael/rainbow-delimiters.git
