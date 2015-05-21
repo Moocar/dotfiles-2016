@@ -311,7 +311,7 @@ and CDR is beginning position."
 
 ;; History
 (setq cider-repl-history-size 1000)
-(setq cider-repl-history-file "cider-history")
+(setq cider-repl-history-file ".cider-history")
 
 ;; Navigate around camel case words
 (add-hook 'cider-repl-mode-hook #'subword-mode)

@@ -1,24 +1,21 @@
 [submodule "submodules/find-file-in-project"]
-	path = submodules/find-file-in-project
-	url = https://github.com/technomancy/find-file-in-project.git
+        path = submodules/find-file-in-project
+        url = https://github.com/technomancy/find-file-in-project.git
 [submodule "submodules/align-cljlet"]
-	path = submodules/align-cljlet
-	url = https://github.com/gstamp/align-cljlet.git
+        path = submodules/align-cljlet
+        url = https://github.com/gstamp/align-cljlet.git
 [submodule "submodules/clojure-mode"]
-	path = submodules/clojure-mode
-	url = https://github.com/stuartsierra/clojure-mode.git
+        path = submodules/clojure-mode
+        url = https://github.com/stuartsierra/clojure-mode.git
 [submodule "submodules/cider"]
-	path = submodules/cider
-	url = https://github.com/stuartsierra/cider.git
-[submodule "submdule/magit"]
-	path = submdule/magit
-	url = git@github.com:magit/magit.git
+        path = submodules/cider
+        url = https://github.com/stuartsierra/cider.git
 [submodule "submodules/magit"]
-	path = submodules/magit
-	url = git@github.com:magit/magit.git
+        path = submodules/magit
+        url = git@github.com:magit/magit.git
 [submodule "submodules/git-modes"]
-	path = submodules/git-modes
-	url = git@github.com:magit/git-modes.git
+        path = submodules/git-modes
+        url = git@github.com:magit/git-modes.git
 [submodule "submodules/rainbow-delimiters"]
-	path = submodules/rainbow-delimiters
-	url = https://github.com/Fanael/rainbow-delimiters.git
+        path = submodules/rainbow-delimiters
+        url = https://github.com/Fanael/rainbow-delimiters.git
