@@ -4,21 +4,6 @@
 [submodule "submodules/align-cljlet"]
         path = submodules/align-cljlet
         url = https://github.com/gstamp/align-cljlet.git
-[submodule "submodules/clojure-mode"]
-        path = submodules/clojure-mode
-        url = https://github.com/stuartsierra/clojure-mode.git
-[submodule "submodules/cider"]
-        path = submodules/cider
-        url = https://github.com/stuartsierra/cider.git
-[submodule "submodules/magit"]
-        path = submodules/magit
-        url = https://github.com/magit/magit.git
 [submodule "submodules/rainbow-delimiters"]
         path = submodules/rainbow-delimiters
         url = https://github.com/Fanael/rainbow-delimiters.git
-[submodule "submodules/git-modes"]
-        path = submodules/git-modes
-        url = https://github.com/magit/git-modes.git
-[submodule "submodules/smex"]
-	path = submodules/smex
-	url = https://github.com/nonsequitur/smex.git

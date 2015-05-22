@@ -14,14 +14,14 @@
     clj-refactor
     color-theme
     dash
-    dash
     gh
     gist
     multiple-cursors
     paredit
+    magit
+    cider
     pkg-info
     ruby-mode
-    s
     smex
     typopunct
     yasnippet

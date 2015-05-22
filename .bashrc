@@ -76,10 +76,16 @@ else
 fi
 
 alias rsync="rsync -P -vaz --rsh=ssh"
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 
 # Local system stuff
 if [ -e ~/.bash_local ]; then
     source ~/.bash_local
+fi
+
+# Local system stuff
+if [ -e ~/.bash.d ]; then
+    source ~/.bash.d/*
 fi
 
 # cdargs
