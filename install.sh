@@ -46,8 +46,8 @@ fi
 
 source $HOME/.bash.d/emacs
 
-link_with_backup .emacs.d
 install_elpa
+link_with_backup .emacs.d
 link_with_backup .emacs
 link_with_backup .emacs-custom.el
 compile_local_emacs_lisp

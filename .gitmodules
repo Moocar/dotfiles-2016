@@ -7,3 +7,6 @@
 [submodule "submodules/rainbow-delimiters"]
         path = submodules/rainbow-delimiters
         url = https://github.com/Fanael/rainbow-delimiters.git
+[submodule "submodules/paredit"]
+	path = submodules/paredit
+	url = https://github.com/emacsmirror/paredit.git

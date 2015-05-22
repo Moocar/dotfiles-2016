@@ -45,6 +45,9 @@
 (require 'magit)
 (global-set-key (kbd "C-x m") 'magit-status)
 
+(setq magit-auto-revert-mode nil)
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;;; following from https://github.com/magnars/.emacs.d/blob/master/setup-magit.el
 
 ;; full screen magit-status

@@ -11,13 +11,12 @@
 
 (defvar my-packages
   '(
-    clj-refactor
+;    clj-refactor
     color-theme
     dash
     gh
     gist
     multiple-cursors
-    paredit
     magit
     cider
     pkg-info

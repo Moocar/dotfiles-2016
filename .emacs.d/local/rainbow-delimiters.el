@@ -1,1 +1,1 @@
-../rainbow-delimiters/rainbow-delimiters.el
+../../submodules/rainbow-delimiters/rainbow-delimiters.el
