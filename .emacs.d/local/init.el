@@ -206,6 +206,7 @@
   (add-hook 'org-mode-hook 'set-word-wrap))
 
 (setq daypage-path "~/Dropbox/daypage/")
+(setq org-agenda-files (list daypage-path))
 
 (defun find-daypage (&optional date)
   "Go to the day page for the specified date,

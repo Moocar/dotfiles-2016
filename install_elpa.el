@@ -25,6 +25,7 @@
     typopunct
     yasnippet
     org
+    markdown-mode
     ))
 
 (dolist (p my-packages)

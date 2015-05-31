@@ -35,6 +35,8 @@ binaries=(
   tree
   ack
   git
+  wget
+  ispell
 )
 
 echo "installing binaries..."
@@ -56,6 +58,7 @@ apps=(
   vagrant
   iterm2
   flux
+  slack
 )
 
 # Install apps to /Applications

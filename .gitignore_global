@@ -47,3 +47,4 @@ $RECYCLE.BIN/
 *.un~
 Session.vim
 .netrwhist
+.cider-history

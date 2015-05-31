@@ -8,3 +8,4 @@
 *.zip
 /.emacs.d/.repl-history
 /.emacs.d/local/cider-history
+/.emacs.d/ido.last
