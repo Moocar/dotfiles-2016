@@ -19,6 +19,7 @@ link_with_backup .rvmrc
 link_with_backup .tmux.conf
 link_with_backup .ackrc
 link_with_backup .mjolnir
+link_with_backup .gnupg
 
 mkdir -p "$HOME/bin"
 link_with_backup bin/clj
