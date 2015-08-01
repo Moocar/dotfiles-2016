@@ -38,7 +38,7 @@ fi
 EMACS_EXEC=emacs
 if [[ `emacs -version` != "24" ]]; then
     EMACS_EXEC="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
-    alias emacs="${EMACS_EXEC}"
+
     echo "Adding alias for command-line emacs"
     touch $HOME/.bash.d/emacs
     echo "alias emacs=\"${EMACS_EXEC}\"" >> $HOME/.bash.d/emacs
@@ -47,10 +47,10 @@ fi
 
 source $HOME/.bash.d/emacs
 
-install_elpa
 link_with_backup .emacs.d
 link_with_backup .emacs
 link_with_backup .emacs-custom.el
+install_elpa
 compile_local_emacs_lisp
 
 write_home_path_file
