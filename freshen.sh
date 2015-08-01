@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # FRESHEN
-# re-install (or install fresh) all the apps you like (where you = Adam)
+# re-install (or install fresh) all the apps you like
 # code & ideas are largely taken from http://lapwinglabs.com/blog/hacker-guide-to-setting-up-your-mac
 
 # Check for Homebrew,
