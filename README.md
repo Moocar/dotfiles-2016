@@ -8,7 +8,7 @@ _Note, this is a fork of Stuart Sierra's [dotfiles](https://github.com/stuartsie
 
 `freshen.sh` is a script that installs common mac programs via brew.
 It uses brew-cask to install applications that typically require a
-download such as dropbox an chrome. It also installs python, Mjolnir
+download such as dropbox and chrome. It also installs python, Mjolnir
 and configures it
 
 ### install.sh
