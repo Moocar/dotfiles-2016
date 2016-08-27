@@ -1,3 +1,16 @@
+;; Set overall height. 300 = 30pt
+; (set-face-attribute 'default nil :height 200)
+
+;; Remove the mode line
+;(setq-default mode-line-format nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; "Twilight" color theme
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/local")
+(load-theme 'twilight-stuart t)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; find-file-in-project
 
@@ -7,6 +20,7 @@
 (push "*.edn" ffip-patterns)
 (push "*.dtm" ffip-patterns)
 (push "*.xml" ffip-patterns)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Magit
@@ -202,11 +216,44 @@
 
 (set-face-attribute 'org-mode-line-clock nil :background "pink")
 
+(setq org-directory "~/Dropbox/org")
+(setq org-mobile-directory "~/Dropbox/MobileOrg")
+(setq org-journal-path (concat org-directory "/journal.org"))
+
+(setq org-todo-keywords
+      '((sequence "TODO" "|" "DONE" "CLOSED")
+        (sequence "SPECCED"
+                  "STARTED"
+                  "BLOCKED"
+                  "MERGED"
+                  "DEPLOYED QA"
+                  "VERIFIED QA"
+                  "DEPLOYED PROD"
+                  "|"
+                  "VERIFIED PROD")))
+
+(global-auto-revert-mode t)
+
+(setq org-default-notes-file "~/Dropbox/daypage/notes.org")
+(define-key global-map "\C-cc" 'org-capture)
+
+
+(setq org-capture-templates
+      '(("r" "Reading" entry (file+headline (concat org-directory "/personal.org") "Readings")
+         "* TODO %? %^L\nEntered on %U\n  %i")
+        ("v" "Video" entry (file+headline (concat org-directory "/personal.org") "Video")
+         "* TODO %? %^L\nEntered on %U\n  %i")
+        ("j" "Journal" entry (file+datetree org-journal-path)
+         "* %?\n  %i")
+        ("b" "Bug" entry (file+headline "~/org/issues.org" "Issues")
+         "
+* %?\n%^{Requester}p\n** Problem Statement\n** Background\n** Acceptance Criteria\n** Complications\n** Comments")))
+
 (when (fboundp 'set-word-wrap)
   (add-hook 'org-mode-hook 'set-word-wrap))
 
 (setq daypage-path "~/Dropbox/daypage/")
-(setq org-agenda-files (list daypage-path))
+(setq org-agenda-files (list org-journal-path))
 
 (defun find-daypage (&optional date)
   "Go to the day page for the specified date,
@@ -270,42 +317,64 @@
 
 (define-key org-mode-map (kbd "C-c o s") 'org-insert-src-block)
 
-(require 'org-element)
+;; (require 'org-element)
 ;; Modified from org-element.el to add support for ` as a markup
 ;; character, after customizing org-emphasis-alist.
-(defun org-element-text-markup-successor (limit)
-  "Search for the next text-markup object.
+;; (defun org-element-text-markup-successor (limit)
+;;   "Search for the next text-markup object.
 
-LIMIT bounds the search.
+;; LIMIT bounds the search.
 
-Return value is a cons cell whose CAR is a symbol among `bold',
-`italic', `underline', `strike-through', `code' and `verbatim'
-and CDR is beginning position."
-  (save-excursion
-    (unless (bolp) (backward-char))
-    (when (re-search-forward org-emph-re limit t)
-      (let ((marker (match-string 3)))
-        (cons (cond
-               ((equal marker "*") 'bold)
-               ((equal marker "/") 'italic)
-               ((equal marker "_") 'underline)
-               ((equal marker "+") 'strike-through)
-               ((equal marker "~") 'code)
-               ((equal marker "=") 'verbatim)
-               ((equal marker "`") 'code)
-               (t (error "Unknown marker at %d" (match-beginning 3))))
-              (match-beginning 2))))))
+;; Return value is a cons cell whose CAR is a symbol among `bold',
+;; `italic', `underline', `strike-through', `code' and `verbatim'
+;; and CDR is beginning position."
+;;   (save-excursion
+;;     (unless (bolp) (backward-char))
+;;     (when (re-search-forward org-emph-re limit t)
+;;       (let ((marker (match-string 3)))
+;;         (cons (cond
+;;                ((equal marker "*") 'bold)
+;;                ((equal marker "/") 'italic)
+;;                ((equal marker "_") 'underline)
+;;                ((equal marker "+") 'strike-through)
+;;                ((equal marker "~") 'code)
+;;                ((equal marker "=") 'verbatim)
+;;                ((equal marker "`") 'code)
+;;                (t (error "Unknown marker at %d" (match-beginning 3))))
+;;               (match-beginning 2))))))
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org-mode Issue Tracker
+;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE/LISP/NREPL/CIDER
 
 (require 'cider)
 (require 'clojure-mode)
+
 (require 'paredit)
+(defun clojure-paredit-hook () (paredit-mode +1))
+(add-hook 'clojure-mode-hook 'clojure-paredit-hook)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
+
+; (define-key clojure-mode-map "{" 'paredit-open-brace)
+; (define-key clojure-mode-map "}" 'paredit-close-brace)
+
+; (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
+                                        ; (define-key paredit-mode-map (kbd "M-[") nil)
+
+;; (require 'parinfer-mode)
+;; (add-hook 'clojure-mode-hook 'parinfer-mode)
+
 (require 'align-cljlet)
 (require 'rainbow-delimiters)
+
+(add-hook 'clojure-mode-hook (lambda ()
+                               (clj-refactor-mode 1)
+                               (cljr-add-keybindings-with-prefix "C-c C-o")))
 
 ;; show documentation for a function in the echo area
 (add-hook 'cider-mode-hook #'eldoc-mode)
@@ -325,16 +394,7 @@ and CDR is beginning position."
 
 (show-paren-mode 1)
 
-(defun clojure-paredit-hook () (paredit-mode +1))
-(add-hook 'clojure-mode-hook 'clojure-paredit-hook)
-(add-hook 'cider-repl-mode-hook 'paredit-mode)
-
 (define-key clojure-mode-map (kbd "C-c M-k") 'cider-copy-current-ns)
-; (define-key clojure-mode-map "{" 'paredit-open-brace)
-; (define-key clojure-mode-map "}" 'paredit-close-brace)
-
-; (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
-; (define-key paredit-mode-map (kbd "M-[") nil)
 
 ;; Custom indentation rules; see clojure-indent-function
 (define-clojure-indent
@@ -421,6 +481,8 @@ ring."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-babel + Clojure
 
+(setq exec-path (append exec-path '("/usr/local/bin/mscgen")))
+
 (load "org-babel-cider")
 
 (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
@@ -428,7 +490,11 @@ ring."
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
-   (clojure . t)))
+   (clojure . t)
+   (dot . t)
+   (mscgen . t)))
+
+(add-to-list 'org-export-backends '"md")
 
 (setq org-src-fontify-natively t)
 (setq org-confirm-babel-evaluate nil)
@@ -614,13 +680,6 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; "Twilight" color theme
-
-(add-to-list 'custom-theme-load-path "~/.emacs.d/local")
-(load-theme 'twilight-stuart t)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Aquamacs / Cocoa Emacs stuff
 
 (when (fboundp 'tabbar-mode) (tabbar-mode -1))
@@ -693,3 +752,17 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 
 ;; If you want to hide the mode-line in every buffer by default
 ;; (add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Markdown Mode
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(require 'dash)
+(custom-set-variables '(markdown-toc-user-toc-structure-manipulation-fn
+                        (lambda (toc-structure)
+                          (-filter (lambda (l) (let ((index (car l)))
+                                                 (> 3 index)))
+                                   toc-structure))))

@@ -201,7 +201,7 @@ mjolnir.hotkey.bind({"cmd", "ctrl", "alt"}, "1",
       local apps = {
          ["Google Chrome"]       = {"left", screens[1]},
          ["Emacs"]               = {"right", screens[1]},
-         ["iTerm"]               = {"left", screens[1]},
+         ["Terminal"]            = {"left", screens[1]},
          ["Slack"]               = {"right", screens[1]},
          ["Rdio"]                = {"full", screens[2]},
          ["Microsoft Outlook"]   = {"left", screens[1]}
@@ -224,7 +224,7 @@ mjolnir.hotkey.bind({"cmd", "ctrl", "alt"}, "2",
          ["Safari"]              = {"full", screens[1]},
          ["Emacs"]               = {"left", screens[2]},
          ["Xcode"]               = {"left", screens[2]},
-         ["iTerm"]               = {"right", screens[2]},
+         ["Terminal"]            = {"right", screens[2]},
          ["Slack"]               = {"full", screens[1]},
          ["Spotify"]             = {"full", screens[1]},
          ["Microsoft Outlook"]   = {"full", screens[1]}

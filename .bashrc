@@ -10,11 +10,26 @@ LIGHT_GREEN="\[\033[1;32m\]"
  LIGHT_GRAY="\[\033[0;37m\]"
  COLOR_NONE="\[\e[0m\]"
 
+# Fix Bluetooth Audio chopiness
+## http://apple.stackexchange.com/a/179209
+
+# defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+# defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Max (editable)" 80
+# defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" 48
+# defaults write com.apple.BluetoothAudioAgent "Apple Initial Bitpool (editable)" 40
+# defaults write com.apple.BluetoothAudioAgent "Apple Initial Bitpool Min (editable)" 40
+# defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool" 58
+# defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool Max" 58
+# defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool Min" 48
+
+# sudo killall bluetoothaudiod
+
 # Used later (maybe in .bash_local) to determine if this is an
 # interactive shell; see http://www.gnu.org/software/bash/manual/html_node/Is-this-Shell-Interactive_003f.html
 case "$-" in
-*i*)	INTERACTIVE_SHELL="true" ;;
-*)	: ;;
+*i*)    INTERACTIVE_SHELL="true" ;;
+*)      : ;;
 esac
 
 # Basic environment
@@ -31,6 +46,7 @@ if [[ -e "$HOME/.path" ]]; then
     done < "$HOME/.path"
     export PATH="$path"
 fi
+
 
 
 # My aliases
@@ -100,7 +116,7 @@ fi
 
 # Java on OS X
 if [[ -f /usr/libexec/java_home ]]; then
-    export JAVA_HOME="$(/usr/libexec/java_home -v 1.7)"
+    export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 fi
 
 ## GPG Agent
@@ -124,3 +140,11 @@ HISTCONTROL=ignoredups
 
 # Append to the Bash history file, rather than overwriting it
 shopt -s histappend
+
+# Grocery
+export ATG_HOME=~/workspace/grocery/ATG
+export JBOSS_HOME=~/workspace/grocery/jboss-4.0.5.GA
+# export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+
+# Go language
+export GOPATH=$HOME/workspace/go
